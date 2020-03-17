@@ -15,6 +15,7 @@
 function returnFirstArgument(name) {
     return name;
 }
+
 /*
  Задание 2:
 
@@ -30,9 +31,10 @@ function returnFirstArgument(name) {
    sumWithDefaults(10) вернет 110
  */
 function sumWithDefaults(a, b = 100) {
-    return a + b; 
+  sumWithDefaults(10);
+     return a + b; 
 }
-sumWithDefaults(10);
+
 /*
  Задание 3:
 

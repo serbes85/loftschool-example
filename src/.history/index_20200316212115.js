@@ -12,9 +12,9 @@
 
  Другими словами: функция должна возвращать в неизменном виде то, что поступает ей на вход
  */
-function returnFirstArgument(name) {
-    return name;
+function returnFirstArgument() {
 }
+
 /*
  Задание 2:
 
@@ -29,10 +29,9 @@ function returnFirstArgument(name) {
  Пример:
    sumWithDefaults(10) вернет 110
  */
-function sumWithDefaults(a, b = 100) {
-    return a + b; 
+function sumWithDefaults(a, b) {
 }
-sumWithDefaults(10);
+
 /*
  Задание 3:
 

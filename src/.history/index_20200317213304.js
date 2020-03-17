@@ -15,6 +15,7 @@
 function returnFirstArgument(name) {
     return name;
 }
+
 /*
  Задание 2:
 
