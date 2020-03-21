@@ -42,10 +42,12 @@ sumWithDefaults(10);
    returnFnResult(() => 'привет') вернет 'привет'
  */
 function returnFnResult(fn) {
-    return fn();
+  return fn();
+
 }
 
-returnFnResult(() => 'Hello');
+returnFnResult(function());
+ 
 /*
  Задание 4:
 

@@ -44,7 +44,6 @@ sumWithDefaults(10);
 function returnFnResult(fn) {
     return fn();
 }
-
 returnFnResult(() => 'Hello');
 /*
  Задание 4:
@@ -80,13 +79,13 @@ function returnCounter(number = 0) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
-    let array = [];
+    let result = [];
 
-    for (let i = 0; i < arguments.length; i++) {
-        array[i] = arguments[i];
+    for ( i = 0; i < arguments.length; i++) {
+        result[i] = arguments[i];
     }
 
-    return array;
+    return result;
 }
 returnArgumentsArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 /*

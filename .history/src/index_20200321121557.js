@@ -44,7 +44,6 @@ sumWithDefaults(10);
 function returnFnResult(fn) {
     return fn();
 }
-
 returnFnResult(() => 'Hello');
 /*
  Задание 4:
@@ -104,9 +103,9 @@ returnArgumentsArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn, ...args) {
-    return fn.bind(null, ...args);
-}
+// function bindFunction(fn, ...args) {
+//     return fn.bind(null, ...args);
+// }
 
 export {
     returnFirstArgument,

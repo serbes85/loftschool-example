@@ -45,7 +45,8 @@ function returnFnResult(fn) {
     return fn();
 }
 
-returnFnResult(() => 'Hello');
+returnFnResult();
+// returnFnResult(() => 'Hello');
 /*
  Задание 4:
 

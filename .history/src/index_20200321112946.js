@@ -44,7 +44,6 @@ sumWithDefaults(10);
 function returnFnResult(fn) {
     return fn();
 }
-
 returnFnResult(() => 'Hello');
 /*
  Задание 4:
@@ -86,7 +85,7 @@ function returnArgumentsArray() {
         array[i] = arguments[i];
     }
 
-    return array;
+    return result;
 }
 returnArgumentsArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 /*

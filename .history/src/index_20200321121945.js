@@ -44,8 +44,7 @@ sumWithDefaults(10);
 function returnFnResult(fn) {
     return fn();
 }
-
-returnFnResult(() => 'Hello');
+returnFnResult(());
 /*
  Задание 4:
 

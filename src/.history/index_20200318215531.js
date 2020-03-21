@@ -42,10 +42,15 @@ sumWithDefaults(10);
    returnFnResult(() => 'привет') вернет 'привет'
  */
 function returnFnResult(fn) {
-    return fn();
+  let fn = 'Hello';
+    function anotherFunction() {
+        // return `${fn} Sergei`;
+        
+    }
+    
+    return anotherFunction();
 }
 
-returnFnResult(() => 'Hello');
 /*
  Задание 4:
 
@@ -59,17 +64,9 @@ returnFnResult(() => 'Hello');
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number = 0) {
-    return function () {
-        return ++number;
-    };
+function returnCounter(number) {
 }
 
-// let f = returnCounter(10);
-
-// console.log(f()); 
-// console.log(f()); 
-// console.log(f());
 /*
  Задание 5 *:
 
@@ -80,15 +77,8 @@ function returnCounter(number = 0) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
-    let array = [];
-
-    for (let i = 0; i < arguments.length; i++) {
-        array[i] = arguments[i];
-    }
-
-    return array;
 }
-returnArgumentsArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
 /*
  Задание 6 *:
 
@@ -104,14 +94,14 @@ returnArgumentsArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn, ...args) {
-    return fn.bind(null, ...args);
+function bindFunction(fn) {
 }
 
 export {
-    returnFirstArgument,
-    sumWithDefaults,
-    returnArgumentsArray,
-    returnCounter,
-    bindFunction
+  returnFirstArgument,
+  sumWithDefaults,
+  returnArgumentsArray,
+  returnFnResult,
+  returnCounter,
+  bindFunction
 }

@@ -44,7 +44,6 @@ sumWithDefaults(10);
 function returnFnResult(fn) {
     return fn();
 }
-
 returnFnResult(() => 'Hello');
 /*
  Задание 4:
@@ -65,7 +64,7 @@ function returnCounter(number = 0) {
     };
 }
 
-// let f = returnCounter(10);
+let f = returnCounter(10);
 
 // console.log(f()); 
 // console.log(f()); 
@@ -79,14 +78,9 @@ function returnCounter(number = 0) {
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
-function returnArgumentsArray() {
-    let array = [];
-
-    for (let i = 0; i < arguments.length; i++) {
-        array[i] = arguments[i];
-    }
-
-    return array;
+function returnArgumentsArray(...args) {
+    for (let arg of args) return args;
+	
 }
 returnArgumentsArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 /*
