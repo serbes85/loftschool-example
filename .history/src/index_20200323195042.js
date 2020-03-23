@@ -18,13 +18,10 @@ function forEach(array, fn) {
  Посмотрите как работает map и повторите это поведение для массива, который будет передан в параметре array
  */
 function map(array, fn) {
-    let newArray = [];
-
+  let newArray = [];
     for (let i = 0; i < array.length; i++) {
-        newArray[i] = fn(array[i], [i], array);
+       newArray.push( fn(array[i], [i], array) );
     }
-
-    return newArray;
 }
 /*
  Задание 3:

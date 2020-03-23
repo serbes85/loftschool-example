@@ -11,6 +11,8 @@ function forEach(array, fn) {
         fn(array[i], [i], array);
     }
 }
+
+array = [1, 2, 3];
 /*
  Задание 2:
 

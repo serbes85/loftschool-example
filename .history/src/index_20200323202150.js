@@ -11,6 +11,15 @@ function forEach(array, fn) {
         fn(array[i], [i], array);
     }
 }
+
+array = [1, 2, 3];
+
+array.forEach(function(fn){
+  fn(array[i], [i], array);
+});
+
+console.log(array);
+
 /*
  Задание 2:
 
