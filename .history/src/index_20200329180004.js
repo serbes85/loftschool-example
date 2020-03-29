@@ -34,14 +34,20 @@ function map(array, fn) {
  */
 function reduce(array, fn, initial) {
     let prev = initial || array[0],
-        i = initial ? 0 : 1;
+        // i = initial ? 0 : 1;
 
+    if (i = initial) {
+        0;
+    } else {
+        1;
+    }
     for (; i < array.length; i++) {
         prev = fn(prev, array[i], [i], array);
     }
     
     return prev;
 }
+
 /*
  Задание 4:
 
@@ -51,40 +57,17 @@ function reduce(array, fn, initial) {
    upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
  */
 function upperProps(obj) {
-    const array = [];
-
-    for (let item in obj) {
-        if (obj.hasOwnProperty(item)) {
-            array.push(item.toUpperCase());
-        }
-    }
-
-    return array;
 }
+
 /*
  Задание 5 *:
 
  Напишите аналог встроенного метода slice для работы с массивами
  Посмотрите как работает slice и повторите это поведение для массива, который будет передан в параметре array
  */
-function slice(array, from = 0, to = array.length) {
-    let newArraySlice = [];
-
-    if (to < 0) {
-        to += array.length;
-    }
-    if (from < 0) {
-        from += array.length;
-    }
-
-    for (let i = from; i < to; i++) {
-        if (array[i]) {
-            newArraySlice.push(array[i]);
-        }
-    }
-
-    return newArraySlice;
+function slice(array, from, to) {
 }
+
 /*
  Задание 6 *:
 
@@ -92,13 +75,6 @@ function slice(array, from = 0, to = array.length) {
  Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
  */
 function createProxy(obj) {
-    const handler = {
-        get(target, name) {
-            return target[name] ** 2;
-        }
-    }
-
-    return new Proxy(obj, handler)
 }
 
 export {
