@@ -16,7 +16,80 @@
    isAllTrue([1, 2, 3, 4, 5], n => n < 10) // вернет true
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
+
+/* Решение с введением переменной*/
+
+// function isAllTrue(array, fn) {
+//     let fnResult = true;   
+
+//     if (array.length == 0) {
+//         throw new Error('empty array');
+//     } else if ( !Array.isArray(array) ) {
+//         throw new Error('empty array');
+//     } else if (typeof fn !== 'function') {
+//         throw new Error('fn is not a function');
+//     }
+
+//     for (let i = 0; i < array.length; i++) {
+//         if ( fn(array[i]) !== true) {
+//             fnResult = false;
+//         }
+//     }
+
+//     return fnResult;
+// }
+
+/* Решение без введения переменной*/
+
+// function isAllTrue(array, fn) {
+  
+//     if (array.length == 0 || !Array.isArray(array)) {
+//         throw new Error('empty array');
+//     } else if (typeof fn !== 'function') {
+//         throw new Error('fn is not a function');
+//     }
+ 
+//     for (let item of array) {
+      
+//         let isFiltered = fn(item);
+
+//         if (!isFiltered) {
+//             return false;
+//         }
+       
+//     }
+
+//     return true;
+// }
+
+/* Решение с объявлением функции на 'empty array' и 'fn is not a function'*/
+
+function isArrayEmpty(array) {
+    if ( !Array.isArray(array) || !array.length) {
+        throw new Error('empty array');
+    } 
+}
+
+function isFnFunction(fn) {
+    if (typeof fn !== 'function') {
+        throw new Error('fn is not a function');
+    } 
+}
+
 function isAllTrue(array, fn) {
+    isArrayEmpty(array);
+    isFnFunction(fn);
+    for (let item of array) {
+    
+        let isFiltered = fn(item);
+
+        if (!isFiltered) {
+            return false;
+        }
+     
+    }
+   
+    return true;
 }
 
 /*
@@ -36,8 +109,21 @@ function isAllTrue(array, fn) {
    isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
  */
 function isSomeTrue(array, fn) {
-}
+    isArrayEmpty(array);
+    isFnFunction(fn);
+    for (let item of array) {
+    
+        let isFiltered = fn(item);
 
+        if (isFiltered) {
+            return true;
+        }
+   
+    }
+
+    return false;
+
+}
 /*
  Задание 3:
 
@@ -49,7 +135,19 @@ function isSomeTrue(array, fn) {
  3.3: Необходимо выбрасывать исключение в случаях:
    - fn не является функцией (с текстом "fn is not a function")
  */
-function returnBadArguments(fn) {
+function returnBadArguments(fn, ...args) {
+    let errorArray = [];
+
+    isFnFunction(fn);
+    for (let arg of args) {
+        try {
+            fn(arg);
+        } catch (err) {
+            errorArray.push(arg);
+        }
+    }
+    
+    return errorArray;
 }
 
 /*
@@ -69,7 +167,48 @@ function returnBadArguments(fn) {
    - number не является числом (с текстом "number is not a number")
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator() {
+function calculator(number = 0) {
+    if (typeof number !== 'number') {
+        throw new Error('number is not a number');
+    }
+
+    let object = {
+        sum(...args) {
+            for (let arg of args) {
+                number += arg;
+            }
+
+            return number;
+        },
+        dif(...args) {
+            for (let arg of args) {
+                number -= arg;
+            }
+
+            return number;
+        },
+        div(...args) {
+            for (let arg of args) {
+                if ( arg == 0) {
+                    throw new Error('division by 0'); 
+                }
+                number = number / arg;
+            }
+
+            return number;
+        },
+        mul(...args) {
+            for (let arg of args) {
+                number = number * arg;
+            }
+
+            return number;
+        },
+
+    };
+   
+    return object;
+    
 }
 
 /* При решении задач, пострайтесь использовать отладчик */
