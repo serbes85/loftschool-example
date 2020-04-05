@@ -173,38 +173,16 @@ function calculator(number = 0) {
     }
 
     let object = {
-        sum(...args) {
-            for (let arg of args) {
-                number += arg;
+        sum: (...args) => args.reduce((acc, val) => acc + val, number),
+        dif: (...args) => args.reduce((acc, val) => acc - val, number),
+        mul: (...args) => args.reduce((acc, val) => acc * val, number),
+        div: (...args) => args.reduce((acc, val) => {
+            if ( !val) {
+                throw new Error('division by 0'); 
             }
 
-            return number;
-        },
-        dif(...args) {
-            for (let arg of args) {
-                number -= arg;
-            }
-
-            return number;
-        },
-        div(...args) {
-            for (let arg of args) {
-                if ( arg == 0) {
-                    throw new Error('division by 0'); 
-                }
-                number = number / arg;
-            }
-
-            return number;
-        },
-        mul(...args) {
-            for (let arg of args) {
-                number = number * arg;
-            }
-
-            return number;
-        },
-
+            return acc / val
+        }, number),    
     };
    
     return object;
