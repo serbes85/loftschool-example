@@ -11,6 +11,12 @@
    createDivWithText('loftschool') // создаст элемент div, поместит в него 'loftschool' и вернет созданный элемент
  */
 function createDivWithText(text) {
+    let div = document.createElement('div');
+
+    div.textContent = text;
+
+    return div;
+   
 }
 
 /*
@@ -22,6 +28,7 @@ function createDivWithText(text) {
    prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
  */
 function prepend(what, where) {
+    where.prepend(what);
 }
 
 /*
@@ -44,8 +51,17 @@ function prepend(what, where) {
    findAllPSiblings(document.body) // функция должна вернуть массив с элементами div и span т.к. следующим соседом этих элементов является элемент с тегом P
  */
 function findAllPSiblings(where) {
-}
+    let whereChildren = where.children,
+        array = [];
 
+    for (let i = 0; i < whereChildren.length - 1; i++) {
+        if (whereChildren[i].nextElementSibling.nodeName === 'P') {
+            array.push(whereChildren[i]);
+        }
+    }
+
+    return array;
+}
 /*
  Задание 4:
 
@@ -66,7 +82,7 @@ function findAllPSiblings(where) {
 function findError(where) {
     var result = [];
 
-    for (var child of where.childNodes) {
+    for (var child of where.children) {
         result.push(child.innerText);
     }
 
@@ -86,6 +102,11 @@ function findError(where) {
    должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+    for ( let child of where.childNodes) {
+        if (child.nodeType === 3) {
+            where.removeChild(child);
+        }
+    }
 }
 
 /*
@@ -101,6 +122,17 @@ function deleteTextNodes(where) {
    должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
+
+    for (let i = 0; i < where.childNodes.length; i++) {
+        let child = where.childNodes[i];
+
+        if (child.nodeType === 3) {
+            where.removeChild(child); // удаляем ребенка
+            i--; // уменьшаем счетчик т.к. все сместилось
+        } else if (child.nodeType === 1) {
+            deleteTextNodesRecursive(child); // вызываем рекурсию
+        }
+    }
 }
 
 /*
@@ -123,7 +155,44 @@ function deleteTextNodesRecursive(where) {
      texts: 3
    }
  */
-function collectDOMStat(root) {
+function collectDOMStat(root, object) {
+    if (object === undefined) {
+        object = {
+            tags: {},
+            classes: {},
+            texts: 0,
+        };
+    }
+
+    root.childNodes.forEach(element => {
+        if (element.nodeType === 3) {
+            object.texts++;
+        }
+
+        if (element.nodeType === 1) {
+            if (object.tags.hasOwnProperty(element.tagName)) {
+                object.tags[element.tagName]++;
+
+            } else {
+                object.tags[element.tagName] = 1;
+            }
+
+            for (let className of element.classList) {
+                if (object.classes.hasOwnProperty(className)) {
+                    object.classes[className]++;
+  
+                } else {
+                    object.classes[className] = 1;
+                }
+            }
+        }
+
+        if (element.childNodes.length > 0) {
+            collectDOMStat(element, object);
+        }
+    });
+
+    return object;
 }
 
 /*
@@ -159,6 +228,38 @@ function collectDOMStat(root) {
    }
  */
 function observeChildNodes(where, fn) {
+    let observer = new MutationObserver(mutationRecords => {
+        mutationRecords.forEach(mutation => {
+            let object = {
+                type: '',
+                nodes: [],
+            }
+            let isRemoved = true; 
+
+            for (let node of mutation.removedNodes) {
+                object.nodes.push(node);
+            }
+
+            for (let node of mutation.addedNodes ) {
+                object.nodes.push(node);
+                isRemoved = false;
+
+            }
+
+            if (isRemoved) {
+                object.type = 'remove';
+            } else {
+                object.type = 'insert';
+            }
+            fn(object);
+        })
+    
+    });
+    observer.observe(where, {
+        childList: true, // наблюдать за непосредственными детьми
+        subtree: true, // и более глубокими потомками
+        characterDataOldValue: true // передавать старое значение в колбэк
+    });
 }
 
 export {
